@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>cor1ne — Dirección & Fotógrafia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #161616;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.18);
+    --text: #f0ede8;
+    --text-muted: rgba(240,237,232,0.45);
+    --text-dim: rgba(240,237,232,0.25);
+    --accent: #c8b89a;
+    --accent-dim: rgba(200,184,154,0.15);
+    --red: #d44b3a;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 60%, var(--bg) 100%),
+      radial-gradient(ellipse at 70% 40%, rgba(200,184,154,0.04) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.4;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 0.5px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    position: relative;
+    max-width: 400px;
+    line-height: 2;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 0.5px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--text-dim), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 7rem 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    min-width: 2.5rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* FOTOGRAFÍA */
+  #fotografia { background: var(--bg); }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 3px;
+  }
+
+  .photo-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface);
+  }
+
+  .photo-item:nth-child(1) { grid-column: 1 / 6; grid-row: 1 / 3; aspect-ratio: 2/3; }
+  .photo-item:nth-child(2) { grid-column: 6 / 9; grid-row: 1; aspect-ratio: 4/3; }
+  .photo-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1; aspect-ratio: 4/3; }
+  .photo-item:nth-child(4) { grid-column: 6 / 10; grid-row: 2; aspect-ratio: 4/3; }
+  .photo-item:nth-child(5) { grid-column: 10 / 13; grid-row: 2; aspect-ratio: 3/2; }
+  .photo-item:nth-child(6) { grid-column: 1 / 5; grid-row: 3; aspect-ratio: 4/3; }
+  .photo-item:nth-child(7) { grid-column: 5 / 9; grid-row: 3; aspect-ratio: 4/3; }
+  .photo-item:nth-child(8) { grid-column: 9 / 13; grid-row: 3; aspect-ratio: 4/3; }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 0.5px solid var(--border);
+    transition: border-color 0.3s;
+  }
+
+  .photo-placeholder:hover { border-color: var(--border-hover); }
+
+  .photo-icon {
+    width: 32px;
+    height: 32px;
+    opacity: 0.18;
+  }
+
+  .photo-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,10,10,0.7);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .photo-item:hover .photo-overlay { opacity: 1; }
+
+  .photo-info { font-size: 10px; letter-spacing: 0.1em; color: var(--text); }
+  .photo-info strong { display: block; font-family: var(--serif); font-size: 1.1rem; font-weight: 300; margin-bottom: 4px; }
+
+  .photo-upload-note {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    border: 0.5px dashed var(--border-hover);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    line-height: 2;
+  }
+
+  .photo-upload-note strong { color: var(--accent); }
+
+  /* CORTOMETRAJES */
+  #cortometrajes { background: var(--surface); }
+
+  .films-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .film-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 0.5px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .film-item:first-child { border-top: 0.5px solid var(--border); }
+
+  .film-item:hover { background: rgba(255,255,255,0.02); }
+
+  .film-num {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .film-info {}
+  .film-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 0.4rem;
+  }
+
+  .film-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .film-meta span { display: flex; align-items: center; gap: 6px; }
+
+  .film-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  .film-play {
+    width: 48px;
+    height: 48px;
+    border: 0.5px solid var(--border-hover);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .film-item:hover .film-play {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .film-play svg { width: 14px; height: 14px; fill: currentColor; margin-left: 2px; }
+
+  .film-embed {
+    display: none;
+    grid-column: 1 / -1;
+    padding: 1rem 0 2rem;
+  }
+
+  .film-embed.open { display: block; }
+
+  .film-embed-inner {
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 4px;
+  }
+
+  .film-embed-url {
+    width: 100%;
+    background: var(--bg);
+    border: 0.5px solid var(--border-hover);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.75rem 1rem;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    outline: none;
+  }
+
+  .film-embed-url:focus { border-color: var(--accent); }
+
+  .film-embed-preview {
+    aspect-ratio: 16/9;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .film-embed-preview iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* PROYECTOS */
+  #proyectos { background: var(--bg); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    padding: 2.5rem;
+    background: var(--bg);
+    border: none;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .project-card:hover { background: var(--surface); }
+
+  .project-tag {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .project-tag::before {
+    content: '';
+    width: 18px;
+    height: 0.5px;
+    background: var(--accent);
+  }
+
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .project-desc {
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .project-arrow {
+    width: 28px;
+    height: 28px;
+    border: 0.5px solid var(--border-hover);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .project-card:hover .project-arrow {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* BIO */
+  #bio { background: var(--surface); }
+
+  .bio-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .bio-portrait {
+    aspect-ratio: 3/4;
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bio-portrait-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--accent);
+    border-style: solid;
+    border-width: 0;
+    opacity: 0.5;
+  }
+
+  .bio-portrait-corner:nth-child(1) { top: 12px; left: 12px; border-top-width: 0.5px; border-left-width: 0.5px; }
+  .bio-portrait-corner:nth-child(2) { top: 12px; right: 12px; border-top-width: 0.5px; border-right-width: 0.5px; }
+  .bio-portrait-corner:nth-child(3) { bottom: 12px; left: 12px; border-bottom-width: 0.5px; border-left-width: 0.5px; }
+  .bio-portrait-corner:nth-child(4) { bottom: 12px; right: 12px; border-bottom-width: 0.5px; border-right-width: 0.5px; }
+
+  .bio-portrait-icon { opacity: 0.1; }
+  .bio-portrait-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+
+  .bio-content {}
+
+  .bio-statement {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .bio-text {
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 2;
+    margin-bottom: 2rem;
+  }
+
+  .bio-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 2.5rem;
+  }
+
+  .bio-stat {
+    background: var(--surface);
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .bio-stat-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--accent);
+    display: block;
+  }
+
+  .bio-stat-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  /* CONTACTO */
+  #contacto { background: var(--bg); }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-intro {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  .contact-intro em { font-style: italic; color: var(--accent); }
+
+  .contact-note {
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 2;
+    margin-bottom: 3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 0.5px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .contact-link:hover {
+    border-color: var(--border-hover);
+    background: var(--surface);
+  }
+
+  .contact-link-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--accent-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-link-icon svg { width: 14px; height: 14px; fill: var(--accent); }
+
+  .contact-link span { flex: 1; }
+  .contact-link-arrow { color: var(--text-dim); font-size: 16px; }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .form-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .form-input {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.875rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    resize: none;
+    appearance: none;
+  }
+
+  .form-input:focus { border-color: var(--accent); }
+
+  .form-input::placeholder { color: var(--text-dim); }
+
+  .form-submit {
+    background: var(--accent);
+    border: none;
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 3rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--text-muted);
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* FADE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding: 0 1.5rem 4rem; }
+    .bio-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .photo-item:nth-child(n) { grid-column: span 6; }
+    .film-item { grid-template-columns: 40px 1fr auto; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">cor<span>1</span>ne</a>
+  <ul class="nav-links">
+    <li><a href="#fotografia">Fotografía</a></li>
+    <li><a href="#cortometrajes">Films</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">Directora de Cine &amp; Fotógrafa</div>
+  <h1 class="hero-title">
+    cor<em>1</em>ne
+  </h1>
+  <p class="hero-sub">
+    Cordoba, Argentina<br>
+    Imagen en movimiento · Fotografía · Dirección audiovisual
+  </p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- FOTOGRAFÍA -->
+<section id="fotografia">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Fotografía</h2>
+    <div class="section-line"></div>
+  </div>
+
+<div class="photo-grid fade-in">
+
+  <!-- FOTO 1 -->
+  <div class="photo-item">
+    <img src="señora.webp"
+         alt="Árbol"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie I</strong>
+        Señora
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO 2 -->
+  <div class="photo-item">
+    <img src="baile.webp"
+         alt="Baile"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie II</strong>
+        Baile
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO 3 -->
+  <div class="photo-item">
+    <img src="grito.webp"
+         alt="Perrito"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie III</strong>
+        grito
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO 4 -->
+  <div class="photo-item">
+    <img src="niño.png"
+         alt="Yoi"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie IV</strong>
+        niño
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO 5 -->
+  <div class="photo-item">
+    <img src="arbol.webp"
+         alt="Árbol"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie V</strong>
+        Árbol
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO 6 -->
+  <div class="photo-item">
+    <img src="baile.webp"
+         alt="Baile"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie VI</strong>
+        Baile
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO 7 -->
+  <div class="photo-item">
+    <img src="perrito.png"
+         alt="Perrito"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie VII</strong>
+        Perrito
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO 8 -->
+  <div class="photo-item">
+    <img src="via.png"
+         alt="Yoi"
+         style="width:100%; height:100%; object-fit:cover;" />
+
+    <div class="photo-overlay">
+      <div class="photo-info">
+        <strong>Serie VIII</strong>
+        via
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</section>
+
+<!-- CORTOMETRAJES -->
+<section id="cortometrajes">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Cortometrajes</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="films-list fade-in">
+    <div class="film-item" onclick="toggleFilm(this)">
+      <span class="film-num">001</span>
+      <div class="film-info">
+        <div class="film-title">Título del Film I</div>
+        <div class="film-meta">
+          <span><span class="film-dot"></span> 2024</span>
+          <span>Dirección</span>
+          <span>12 min</span>
+        </div>
+      </div>
+      <div class="film-play">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="film-embed">
+        <div class="film-embed-inner">
+          <div style="margin-bottom:0.5rem;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);">URL del video (YouTube, Vimeo...)</div>
+          <input class="film-embed-url" type="text" placeholder="https://www.youtube.com/embed/VIDEO_ID  o  https://player.vimeo.com/video/VIDEO_ID" oninput="loadEmbed(this)" />
+          <div class="film-embed-preview" id="preview-0">
+            <span style="letter-spacing:0.12em">Pegá el embed URL para previsualizar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="film-item" onclick="toggleFilm(this)">
+      <span class="film-num">002</span>
+      <div class="film-info">
+        <div class="film-title">Título del Film II</div>
+        <div class="film-meta">
+          <span><span class="film-dot"></span> 2023</span>
+          <span>Dirección · Guión</span>
+          <span>18 min</span>
+        </div>
+      </div>
+      <div class="film-play">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="film-embed">
+        <div class="film-embed-inner">
+          <div style="margin-bottom:0.5rem;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);">URL del video (YouTube, Vimeo...)</div>
+          <input class="film-embed-url" type="text" placeholder="https://www.youtube.com/embed/VIDEO_ID  o  https://player.vimeo.com/video/VIDEO_ID" oninput="loadEmbed(this)" />
+          <div class="film-embed-preview" id="preview-1">
+            <span style="letter-spacing:0.12em">Pegá el embed URL para previsualizar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="film-item" onclick="toggleFilm(this)">
+      <span class="film-num">003</span>
+      <div class="film-info">
+        <div class="film-title">Título del Film III</div>
+        <div class="film-meta">
+          <span><span class="film-dot"></span> 2022</span>
+          <span>Dirección · Fotografía</span>
+          <span>25 min</span>
+        </div>
+      </div>
+      <div class="film-play">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="film-embed">
+        <div class="film-embed-inner">
+          <div style="margin-bottom:0.5rem;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);">URL del video (YouTube, Vimeo...)</div>
+          <input class="film-embed-url" type="text" placeholder="https://www.youtube.com/embed/VIDEO_ID  o  https://player.vimeo.com/video/VIDEO_ID" oninput="loadEmbed(this)" />
+          <div class="film-embed-preview" id="preview-2">
+            <span style="letter-spacing:0.12em">Pegá el embed URL para previsualizar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS AUDIOVISUALES -->
+<section id="proyectos">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Proyectos audiovisuales</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid fade-in">
+    <div class="project-card">
+      <div class="project-tag">Documental</div>
+      <div class="project-name">Nombre del proyecto</div>
+      <p class="project-desc">Descripción del proyecto audiovisual. Contá de qué trata, cuál fue tu rol y qué buscabas expresar con esta pieza.</p>
+      <div class="project-footer">
+        <span>2026 · Cordoba</span>
+        <div class="project-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Videoclip</div>
+      <div class="project-name">Nombre del proyecto</div>
+      <p class="project-desc">Descripción del proyecto audiovisual. Contá de qué trata, cuál fue tu rol y qué buscabas expresar con esta pieza.</p>
+      <div class="project-footer">
+        <span>2026 · Cordoba</span>
+        <div class="project-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Experimental</div>
+      <div class="project-name">Nombre del proyecto</div>
+      <p class="project-desc">Descripción del proyecto audiovisual. Contá de qué trata, cuál fue tu rol y qué buscabas expresar con esta pieza.</p>
+      <div class="project-footer">
+        <span>2026 · Cordoba</span>
+        <div class="project-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Publicidad</div>
+      <div class="project-name">Nombre del proyecto</div>
+      <p class="project-desc">Descripción del proyecto audiovisual. Contá de qué trata, cuál fue tu rol y qué buscabas expresar con esta pieza.</p>
+      <div class="project-footer">
+        <span>2026 · Cordoba</span>
+        <div class="project-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section id="bio">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Sobre mí</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="bio-layout fade-in">
+<div class="bio-portrait">
+  <div class="bio-portrait-corner"></div>
+  <div class="bio-portrait-corner"></div>
+  <div class="bio-portrait-corner"></div>
+  <div class="bio-portrait-corner"></div>
+
+  <img src="yoi.jpg"
+       alt="Foto personal"
+       style="width:100%; height:100%; object-fit:cover;" />
+</div>
+
+    <div class="bio-content">
+      <p class="bio-statement">
+        "Reemplazá esto con tu frase personal. Algo que defina tu mirada y tu forma de ver el mundo a través del lente."
+      </p>
+      <p class="bio-text">
+        Contá tu historia acá. De dónde venís, qué te llevó a la fotografía y al cine, cuál es tu proceso creativo. Podés hablar de tus influencias, de los temas que te interesan explorar, y del tipo de proyectos que te apasionan.
+      </p>
+      <p class="bio-text">
+        Segundo párrafo opcional: podés mencionar tu formación, proyectos destacados, festivales en los que participaste o premios recibidos.
+      </p>
+
+      <div class="bio-stats">
+        <div class="bio-stat">
+          <span class="bio-stat-num">—</span>
+          <span class="bio-stat-label">Films</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-num">—</span>
+          <span class="bio-stat-label">Proyectos</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-num">—</span>
+          <span class="bio-stat-label">Años</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-header fade-in">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Contacto</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="contact-layout fade-in">
+    <div>
+      <h3 class="contact-intro">Trabajemos<br><em>juntos.</em></h3>
+      <p class="contact-note">
+        Disponible para proyectos de dirección, fotografía y colaboraciones audiovisuales. Buenos Aires y remoto.
+      </p>
+
+      <div class="contact-links">
+        <a href="mailto:tu@email.com" class="contact-link">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <span>tu@email.com</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://instagram.com/_______cor1" target="_blank" class="contact-link">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <span>@_______cor1</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="handleForm(event)">
+      <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input class="form-input" type="text" placeholder="Tu nombre" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="tu@email.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Proyecto</label>
+        <input class="form-input" type="text" placeholder="¿En qué podemos trabajar juntos?" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mensaje</label>
+        <textarea class="form-input" rows="5" placeholder="Contame más sobre tu idea..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Enviar →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">cor<span>1</span>ne</div>
+  <div class="footer-copy">© 2026 cor1ne · Cordoba, Argentina</div>
+</footer>
+
+<script>
+function toggleFilm(item) {
+  if (event.target.closest('.film-embed')) return;
+  const embed = item.querySelector('.film-embed');
+  const isOpen = embed.classList.contains('open');
+  document.querySelectorAll('.film-embed.open').forEach(e => e.classList.remove('open'));
+  if (!isOpen) embed.classList.add('open');
+}
+
+let previewCount = 0;
+function loadEmbed(input) {
+  const val = input.value.trim();
+  const preview = input.closest('.film-embed-inner').querySelector('.film-embed-preview');
+  if (!val) {
+    preview.innerHTML = '<span style="letter-spacing:0.12em">Pegá el embed URL para previsualizar</span>';
+    return;
+  }
+  let src = val;
+  if (val.includes('youtube.com/watch?v=')) {
+    const id = val.split('v=')[1]?.split('&')[0];
+    if (id) src = 'https://www.youtube.com/embed/' + id;
+  } else if (val.includes('vimeo.com/') && !val.includes('player.vimeo.com')) {
+    const id = val.split('vimeo.com/')[1]?.split('?')[0];
+    if (id) src = 'https://player.vimeo.com/video/' + id;
+  }
+  preview.innerHTML = '<iframe src="' + src + '" allowfullscreen allow="autoplay; encrypted-media"></iframe>';
+}
+
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Mensaje enviado ✓';
+  btn.style.background = '#2a5a3a';
+  btn.style.opacity = '1';
+  setTimeout(() => { btn.textContent = 'Enviar →'; btn.style.background = ''; }, 3000);
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
